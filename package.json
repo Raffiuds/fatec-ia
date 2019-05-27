@@ -1,0 +1,13 @@
+{
+  "name": "projetoii",
+  "version": "1.0.0",
+  "main": "node src/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node src/index.js"
+  }
+}
