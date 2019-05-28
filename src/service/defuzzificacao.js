@@ -1,7 +1,12 @@
 const run = require("../model/run")
 const gelo = require("../model/gelo")
 
-const paladares = ["Forte", "Suave", "Fraco", "Não é Cuba Libre"]
+const paladares = ["Fraco", "Suave", "Forte", "Não é Cuba Livre"]
+const respostas = [
+    "quantidade de refrigerante não é compativel",
+    "quantidade de run não é compativel",
+    "quantidade de gelo não é compativel",
+]
 
 const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo){
     
@@ -62,9 +67,38 @@ const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo){
                 return paladares[index]
             } else {
 
-                return "Ainda em implementação"
+                const index = values.lastIndexOf(max)
+                return paladares[index]
             }
 
+        },
+
+        informa: function (refri){
+
+            const maxs = []
+            maxs[0] = Math.max(refri.fraca(qtdRefri),
+                refri.suave(qtdRefri), refri.forte(qtdRefri))
+
+            maxs[1] = Math.max(run.fraco(qtdRun), run.suave(qtdRun),
+                run.forte(qtdRun))
+
+            maxs[2] = gelo(qtdGelo)
+            
+            min = Math.min(... maxs)
+
+            mins = maxs.filter((e) =>{
+                return e === min
+            })
+
+            if ( mins.length == 1 ) {
+
+                index = maxs.findIndex((e) => {
+                    return e == min
+                })
+
+                console.log(respostas[index])
+                
+            }
         }
     }
 }
