@@ -8,14 +8,15 @@ const respostas = [
     "quantidade de gelo não é compativel",
 ]
 
-const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo){
+const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo, refri){
     
     return {
         qtdRefri:qtdRefri,
         qtdRun:qtdRun,
         qtdGelo:qtdGelo,
+        refri:refri,
 
-        suave: function(refri){
+        suave: function(){
             return Math.max(
                 Math.min(refri.forte(qtdRefri), run.fraco(qtdRun), gelo(qtdGelo)),
                 Math.min(refri.suave(qtdRefri), run.suave(qtdRun), gelo(qtdGelo)),
@@ -24,7 +25,7 @@ const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo){
 
         },
 
-        forte: function(refri){
+        forte: function(){
             return Math.max(
                 Math.min(refri.forte(qtdRefri), run.suave(qtdRun), gelo(qtdGelo)),
                 Math.min(refri.forte(qtdRefri), run.forte(qtdRun), gelo(qtdGelo)),
@@ -32,7 +33,7 @@ const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo){
             )
         },
 
-        fraco: function(refri){
+        fraco: function(){
             return Math.max(
                 Math.min(refri.fraca(qtdRefri), run.fraco(qtdRun), gelo(qtdGelo)),
                 Math.min(refri.fraca(qtdRefri), run.suave(qtdRun), gelo(qtdGelo)),
@@ -51,7 +52,7 @@ const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo){
             const max = Math.max(... values)
 
             if (max === 0 ){
-                return paladares[3]
+                return [paladares[3]].concat(this.informar(refri))
             } 
 
             const maxs = values.filter((e) =>{
@@ -64,43 +65,50 @@ const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo){
                     return e == max
                 })
 
-                return paladares[index]
+                return [paladares[index]]
             } else {
 
                 const index = values.lastIndexOf(max)
-                return paladares[index]
+                return [paladares[index]]
             }
 
         },
 
-        informa: function (refri){
+        informar: function(refri){
 
             const maxs = []
             maxs[0] = Math.max(refri.fraca(qtdRefri),
                 refri.suave(qtdRefri), refri.forte(qtdRefri))
-
+        
             maxs[1] = Math.max(run.fraco(qtdRun), run.suave(qtdRun),
                 run.forte(qtdRun))
-
+        
             maxs[2] = gelo(qtdGelo)
             
             min = Math.min(... maxs)
-
+        
             mins = maxs.filter((e) =>{
                 return e === min
             })
-
+        
             if ( mins.length == 1 ) {
-
+        
                 index = maxs.findIndex((e) => {
                     return e == min
                 })
-
-                console.log(respostas[index])
-                
+                return [respostas[index]]    
+            } else {
+                const arr = []
+                mins.forEach((e, index)=>{
+                    arr.push(respostas[index])
+                })
+                return arr
             }
         }
     }
 }
+
+
+
 
 module.exports = defuzzificacao
