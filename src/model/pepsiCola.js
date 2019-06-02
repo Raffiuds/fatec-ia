@@ -33,6 +33,14 @@ const pepsiCola = {
         } else if (x > 68 && x <= 70){
             return 0 
         }
+    }, 
+
+    informar: function(){
+        return [
+            "quantidade de Pepsi não é compativel. Quantidade aceitavel é de 60ml a 70ml",
+            "quantidade de run não é compativel. Quantidade aceitavel é de 10ml a 30ml",
+            "quantidade de gelo não é compativel. Quantidade aceitavel é de 20ml",
+        ]
     }
 }
 

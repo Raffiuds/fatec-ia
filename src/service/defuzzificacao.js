@@ -2,11 +2,6 @@ const run = require("../model/run")
 const gelo = require("../model/gelo")
 
 const paladares = ["Fraco", "Suave", "Forte", "Não é Cuba Livre"]
-const respostas = [
-    "quantidade de refrigerante não é compativel",
-    "quantidade de run não é compativel",
-    "quantidade de gelo não é compativel",
-]
 
 const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo, refri){
     
@@ -96,11 +91,14 @@ const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo, refri){
                 index = maxs.findIndex((e) => {
                     return e == min
                 })
-                return [respostas[index]]    
+                return [refri.informar()[index]]    
             } else {
                 const arr = []
-                mins.forEach((e, index)=>{
-                    arr.push(respostas[index])
+                maxs.forEach((e, index)=>{
+
+                    if (e === min){
+                        arr.push(refri.informar()[index])
+                    }
                 })
                 return arr
             }

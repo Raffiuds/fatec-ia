@@ -4,7 +4,6 @@ test('Coca-cola Forte 1 ', () => {
     expect(cocaCola.forte(49)).toBe(0)
 })
 
-
 test('Coca-cola Forte 2 ', () => {
     expect(cocaCola.forte(51)).toBe(1)
 })

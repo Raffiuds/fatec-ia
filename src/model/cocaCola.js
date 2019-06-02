@@ -36,6 +36,14 @@ const  concaCola = {
         } else {
             return 0
         }
+    },
+
+    informar: function(){
+        return [
+            "quantidade de Coca-Cola não é compativel. Quantidade aceitavel é de 50ml a 60ml",
+            "quantidade de run não é compativel. Quantidade aceitavel é de 10ml a 30ml",
+            "quantidade de gelo não é compativel. Quantidade aceitavel é de 20ml",
+        ]
     }
 
 }
