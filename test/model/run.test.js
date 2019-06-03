@@ -30,7 +30,7 @@ test('Run Suave 3 ', () => {
 })
 
 test('Run Suave 4', () => {
-    expect(run.suave(25)).toBe(0.5)
+    expect(run.suave(25)).toBe(1)
 })
 
 test('Run Suave 5 ', () => {

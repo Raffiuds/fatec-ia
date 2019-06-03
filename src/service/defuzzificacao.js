@@ -37,9 +37,9 @@ const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo, refri){
         },
 
         /*Função paladar recebe três parametros em forma de array
-            @param forte
-            @param suave
             @param fraco
+            @param suave
+            @param forte
             @return grau de paladar "Não é Cuba Libre"; "Forte"; "Suave"; "Fraco"
         */
         paladar: function(... values){

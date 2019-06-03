@@ -1,7 +1,8 @@
 const _defuzzificacao = require("../service/defuzzificacao")
 const paladares = []
 paladares['Fraco'] = 15.0
-paladares['Suave'] = 20.0002
+paladares['Suave'] = 20.0
+paladares['Forte'] = 25.0
 paladares['Não é Cuba Livre'] = 30.0
 
 
