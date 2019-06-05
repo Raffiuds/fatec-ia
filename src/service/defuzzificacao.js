@@ -44,6 +44,11 @@ const defuzzificacao = function(qtdRefri, qtdRun, qtdGelo, refri){
         */
         paladar: function(... values){
             
+            console.log(
+            'Fraco: ' + values[0].toFixed(2).replace('.', ',')
+            + '\tSuave: ' + values[1].toFixed(2).replace('.', ',')
+            + "\tForte: " + values[2].toFixed(2).replace('.', ','))
+            
             const max = Math.max(... values)
 
             if (max === 0 ){
