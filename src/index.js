@@ -23,35 +23,52 @@ function index(){
         choices: ['Coca-Cola', 'Pepsi'],
       }, {
         name: 'qtdRefri',
-        type: 'number',
+        type: 'input',
         message: 'Digite a quantidade de refrigerante? (Entre 0 a 100 ml)',
         validate: validateQtd,
       }, {
         name: 'qtdRun',
-        type: 'number',
+        type: 'input',
         message: 'Digite a quantidade de run? (Entre 0 a 100 ml)',
         validate: validateQtd,
       }, {
         name: 'qtdGelo',
-        type: 'number',
+        type: 'input',
         message: 'Digite a quantidade de Gelo? (Entre 0 a 100 ml)',
         validate: validateQtd,
       }]).then((a) => {
         
+        const refri = Number.parseFloat(a.qtdRefri)
+        const run = Number.parseFloat(a.qtdRun)
+        const gelo = Number.parseFloat(a.qtdGelo)
+
         if (a.refri === 'Coca-Cola'){
             fuzzController.cobrarEInformar(
-                fuzzController.paladar(a.qtdRefri, a.qtdRun, a.qtdGelo, cocaCola))
+                fuzzController.paladar(refri, run, gelo, cocaCola))
         } else {
             fuzzController.cobrarEInformar(
-                fuzzController.paladar(a.qtdRefri, a.qtdRun, a.qtdGelo, pepsi))
+                fuzzController.paladar(refri, run, gelo, pepsi))
         }
       })
 
 }
 
 function validateQtd(qtd){
-    return (qtd >= 0 && qtd <= 100 );
+
+  if (!Number.isNaN(qtd)){
+    const num = Number.parseFloat(qtd.replace(',', '.'))
+    if (!Number.isNaN(num)){
+      return (num >= 0 && num <= 100)
+    } else {
+      return false
+    }
+  } else {
+    return (qtd >= 0 && qtd <= 100)
+  }
+    
 }
 
 index()
+
+module.exports = validateQtd
 
